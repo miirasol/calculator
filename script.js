@@ -14,6 +14,26 @@ function divide(a, b) {
     return a / b;
 }
 
+function operate(operator, leftOperand, rightOperand) {
+    let total;
+    switch(operator) {
+        case 'plus':
+            total = add(leftOperand, rightOperand);
+            break;
+        case 'minus':
+            total = subtract(leftOperand, rightOperand);
+            break;
+        case 'multiply':
+            total = multiply(leftOperand, rightOperand);
+            break;
+        case 'divide':
+            total = divide(leftOperand, rightOperand);
+            break;
+    }
+    
+    return total;
+}
+
 const display = document.querySelector('.display');
 
 let content = '';
