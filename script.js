@@ -14,6 +14,26 @@ function divide(a, b) {
     return a / b;
 }
 
+function operate(operator, leftOperand, rightOperand) {
+    let total;
+    switch(operator) {
+        case 'plus':
+            total = add(leftOperand, rightOperand);
+            break;
+        case 'minus':
+            total = subtract(leftOperand, rightOperand);
+            break;
+        case 'multiply':
+            total = multiply(leftOperand, rightOperand);
+            break;
+        case 'divide':
+            total = divide(leftOperand, rightOperand);
+            break;
+    }
+    
+    return total;
+}
+
 const display = document.querySelector('.display');
 
 let content = '';
@@ -34,57 +54,46 @@ function addToDisplay(event) {
     display.textContent = content;
 }
 
-function deleteFromDisplay(event) {
+function deleteFromDisplay() {
     content = content.slice(0, -1);
     display.textContent = content;
+}
+
+function getOperator(event) {
+    return event.target.id;
 }
 
 const calculator = document.querySelector('.calculator-container');
 calculator.addEventListener("click", (event) => {
 
+    if (!content && event.target.id == '0') {
+        return;
+    }
+
     switch(event.target.id) {
         case '1':
-            addToDisplay(event);
-            break;
         case '2':
-            addToDisplay(event);
-            break;
         case '3':
-            addToDisplay(event);
-            break;
         case '4':
-            addToDisplay(event);
-            break;
         case '5':
-            addToDisplay(event);
-            break;
         case '6':
-            addToDisplay(event);
-            break;
         case '7':
-            addToDisplay(event);
-            break;
         case '8':
-            addToDisplay(event);
-            break;
         case '9':
             addToDisplay(event);
             break;
         case '0':
             addToDisplay(event);
             break;
+
         case 'plus':
-            operator = 'plus';
-            break;
         case 'minus':
-            operator = 'minus';
-            break;
         case 'divide':
-            operator = 'divide';
-            break;
         case 'multiply':
-            operator = 'multiply';
+            operator = getOperator(event);
             break;
+
+
         case 'del':
             deleteFromDisplay(event);
             break;
