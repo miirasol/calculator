@@ -30,20 +30,20 @@ h1 {
 
 .calculator-container {
     display: flex;
-    height: 500px;
-    width: 400px;
+    height: 550px;
+    width: 350px;
     background-color: grey;
     flex-direction: column;
     padding-bottom: 1em;
-    gap: .25em;
+    gap: 1em;
 }
 
 .display {
     display: flex;
-    margin: 1.5em 1em 1em;
-    padding-right: .25em;
+    margin: 1.5em 1em 0.5em;
+    padding-right: .5rem;
     background-color: darkseagreen;
-    height: 80px;
+    height: 100px;
     justify-content: flex-end;
     align-items: flex-end;
     text-align: right;
@@ -55,17 +55,19 @@ h1 {
     display: flex;
     justify-content: space-between;
     padding: 0 1em;
-    font-size: 1.5em;
     align-items: center;
 }
 
 .brand {
     display: flex;
+    font-size: 2em;
+    padding-left: .25em;
 }
 
 .firstRowButtons {
     display: flex;
-    gap: .5em;
+    gap: 1em;
+    padding-right: .5em;
 }
 
 .firstRowButtons > button {
@@ -73,22 +75,23 @@ h1 {
     color: white;
     width: 4rem;
     aspect-ratio: 1 / 1;
-    font-size: 1em;
+    font-size: 1.5em;
 }
 
 .otherRows {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    padding: 0 1rem;
 }
 
 .otherRows > button {
     padding: 2px;
-    border-radius: 2em;
+    border-radius: 2rem;
     color: white;
     width: 4rem;
     aspect-ratio: 1 / 1;
-    font-size: 1em;
+    font-size: 2rem;
     color: black;
 }
 
