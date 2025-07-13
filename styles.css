@@ -1,0 +1,101 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: white;
+}
+
+header {
+    display: flex;
+    padding: 1em 1em 0;
+    color: black;
+}
+
+h1 {
+    display: flex;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.calculator-container {
+    display: flex;
+    height: 500px;
+    width: 400px;
+    background-color: grey;
+    flex-direction: column;
+    padding-bottom: 1em;
+    gap: .25em;
+}
+
+.display {
+    display: flex;
+    margin: 1.5em 1em 1em;
+    padding-right: .25em;
+    background-color: darkseagreen;
+    height: 80px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: right;
+    font-size: 2em;
+    color: white;
+}
+
+.firstRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+    font-size: 1.5em;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+}
+
+.firstRowButtons {
+    display: flex;
+    gap: .5em;
+}
+
+.firstRowButtons > button {
+    border-radius: 2em;
+    color: white;
+    width: 4rem;
+    aspect-ratio: 1 / 1;
+    font-size: 1em;
+}
+
+.otherRows {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.otherRows > button {
+    padding: 2px;
+    border-radius: 2em;
+    color: white;
+    width: 4rem;
+    aspect-ratio: 1 / 1;
+    font-size: 1em;
+    color: black;
+}
+
+#clear {
+    background-color: red;
+}
+
+#del {
+    background-color: burlywood;
+}
