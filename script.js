@@ -17,50 +17,79 @@ function divide(a, b) {
 const display = document.querySelector('.display');
 
 let content = '';
+let operator;
+let leftOperand;
+let rightOperand;
+
+function clearContent() {
+    content = '';
+    operator = '';
+    leftOperand = '';
+    rightOperand = '';
+    display.textContent = content;
+}
+
+function addToDisplay(event) {
+    content += event.target.id;
+    display.textContent = content;
+}
+
+function deleteFromDisplay(event) {
+    content = content.slice(0, -1);
+    display.textContent = content;
+}
 
 const calculator = document.querySelector('.calculator-container');
 calculator.addEventListener("click", (event) => {
 
     switch(event.target.id) {
         case '1':
-            content += '1';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '2':
-            content += '2';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '3':
-            content += '3';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '4':
-            content += '4';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '5':
-            content += '5';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '6':
-            content += '6';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '7':
-            content += '7';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '8':
-            content += '8';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '9':
-            content += '9';
-            display.textContent = content;
+            addToDisplay(event);
             break;
         case '0':
-            content += '0';
-            display.textContent = content;
+            addToDisplay(event);
+            break;
+        case 'plus':
+            operator = 'plus';
+            break;
+        case 'minus':
+            operator = 'minus';
+            break;
+        case 'divide':
+            operator = 'divide';
+            break;
+        case 'multiply':
+            operator = 'multiply';
+            break;
+        case 'del':
+            deleteFromDisplay(event);
+            break;
+        case 'clear':
+            clearContent();
             break;
     }
 });
