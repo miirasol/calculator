@@ -5,6 +5,7 @@ let operator = "";
 let leftOperand = "";
 let rightOperand = "";
 let displayingTotal = false;
+let operatorButtonPressed = false;
 
 function add(a, b) {
 	return a + b;
@@ -22,14 +23,14 @@ function divide(a, b) {
 	return a / b;
 }
 
-function operate(operator, a, b) {
+function operate(op, a, b) {
 	if (isNaN(rightOperand)) {
 		return;
 	}
 
 	let total;
 
-	switch (operator) {
+	switch (op) {
 		case "plus":
 			total = add(a, b);
 			break;
@@ -40,9 +41,10 @@ function operate(operator, a, b) {
 			total = multiply(a, b);
 			break;
 		case "divide":
-			if (!b) {
+			if (b === 0) {
 				clearContent();
-				display.textContent = "Can't divide by 0.";
+				content = "Can't divide by 0.";
+				operatorButtonPressed = false;
 				return;
 			}
 
@@ -51,59 +53,21 @@ function operate(operator, a, b) {
 	}
 
 	leftOperand = total;
-	rightOperand = "";
-	content = parseFloat(total);
-	display.textContent = content;
-	// displayingTotal = true;
-	// return parseFloat(total);
-}
+	rightOperand = '';
+	operator = '';
+	operatorButtonPressed = false;
 
-function clearContent() {
-	content = "";
-	operator = "";
-	leftOperand = "";
-	rightOperand = "";
-	display.textContent = content;
-}
-
-function buttonToDisplay(event) {
-	// if (displayingTotal) {
-	// 	clearContent();
-	// 	displayingTotal = false;
-	// }
-
-	content += event.target.id;
-	if (leftOperand) {
-		rightOperand = parseFloat(content);
-	}
-	display.textContent = content;
-}
-
-function deleteFromDisplay() {
-	content = content.slice(0, -1);
-	display.textContent = content;
+	content = total;
 }
 
 function getOperator(event) {
-	if (!leftOperand) {
-		leftOperand = content;
-		content = "";
-		display.textContent = content;
-	} else {
-		rightOperand = content;
-		content = "";
-		display.textContent = content;
-	}
-
+	operatorButtonPressed = true;
+	content = '';
+	display.textContent = content;
 	return event.target.id;
 }
 
 function addDecimal() {
-	// if (displayingTotal) {
-	// 	clearContent();
-	// 	displayingTotal = false;
-	// }
-
 	if (!content) {
 		content += "0.";
 		display.textContent = content;
@@ -115,6 +79,34 @@ function addDecimal() {
 	}
 
 	return;
+}
+
+function assignToOperand(content) {
+	if (!operatorButtonPressed) {
+		leftOperand = parseFloat(content);
+	} else {
+		rightOperand = parseFloat(content);
+	}
+}
+
+function buttonToDisplay(event) {
+	content += event.target.id;
+	assignToOperand(content);
+	display.textContent = content;
+}
+
+function deleteFromDisplay() {
+	content = content.slice(0, -1);
+	assignToOperand(content);
+	display.textContent = content;
+}
+
+function clearContent() {
+	content = "";
+	operator = "";
+	leftOperand = "";
+	rightOperand = "";
+	display.textContent = content;
 }
 
 const calculator = document.querySelector(".calculator-container");
@@ -149,22 +141,12 @@ calculator.addEventListener("click", (event) => {
 		case "minus":
 		case "divide":
 		case "multiply":
-			content = parseFloat(content);
-			display.textContent = content;
-
-			if (rightOperand) {
-				operate(operator, leftOperand, rightOperand);
-				leftOperand = content;
-				content = "";
-				rightOperand = "";
-			}
-
 			operator = getOperator(event);
 			break;
 
 		case "equalsTo":
-			rightOperand = parseFloat(content);
 			operate(operator, leftOperand, rightOperand);
+			display.textContent = content;
 			break;
 
 		case "del":
