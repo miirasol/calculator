@@ -1,3 +1,11 @@
+const display = document.querySelector(".display");
+
+let content = "";
+let operator = "";
+let leftOperand = "";
+let rightOperand = "";
+let displayingTotal = false;
+
 function add(a, b) {
 	return a + b;
 }
@@ -15,6 +23,10 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
+	if (isNaN(rightOperand)) {
+		return;
+	}
+
 	let total;
 
 	switch (operator) {
@@ -28,22 +40,23 @@ function operate(operator, a, b) {
 			total = multiply(a, b);
 			break;
 		case "divide":
+			if (!b) {
+				clearContent();
+				display.textContent = "Can't divide by 0.";
+				return;
+			}
+
 			total = divide(a, b);
 			break;
 	}
 
 	leftOperand = total;
 	rightOperand = "";
-	return parseFloat(total);
+	content = parseFloat(total);
+	display.textContent = content;
+	// displayingTotal = true;
+	// return parseFloat(total);
 }
-
-const display = document.querySelector(".display");
-
-let content = "";
-let operator = "";
-let leftOperand = "";
-let rightOperand = "";
-let displayingTotal = false;
 
 function clearContent() {
 	content = "";
@@ -54,6 +67,11 @@ function clearContent() {
 }
 
 function buttonToDisplay(event) {
+	// if (displayingTotal) {
+	// 	clearContent();
+	// 	displayingTotal = false;
+	// }
+
 	content += event.target.id;
 	if (leftOperand) {
 		rightOperand = parseFloat(content);
@@ -71,20 +89,37 @@ function getOperator(event) {
 		leftOperand = content;
 		content = "";
 		display.textContent = content;
-		console.log(leftOperand);
 	} else {
 		rightOperand = content;
 		content = "";
 		display.textContent = content;
-		console.log(rightOperand);
 	}
 
 	return event.target.id;
 }
 
+function addDecimal() {
+	// if (displayingTotal) {
+	// 	clearContent();
+	// 	displayingTotal = false;
+	// }
+
+	if (!content) {
+		content += "0.";
+		display.textContent = content;
+	}
+
+	if (!content.includes(".")) {
+		content += ".";
+		display.textContent = content;
+	}
+
+	return;
+}
+
 const calculator = document.querySelector(".calculator-container");
 calculator.addEventListener("click", (event) => {
-	if (!content && event.target.id == "0") {
+	if (content == "0" && event.target.id == "0") {
 		return;
 	}
 
@@ -106,6 +141,10 @@ calculator.addEventListener("click", (event) => {
 			buttonToDisplay(event);
 			break;
 
+		case "decimal":
+			addDecimal(event);
+			break;
+
 		case "plus":
 		case "minus":
 		case "divide":
@@ -114,8 +153,7 @@ calculator.addEventListener("click", (event) => {
 			display.textContent = content;
 
 			if (rightOperand) {
-				content = operate(operator, leftOperand, rightOperand);
-				display.textContent = content;
+				operate(operator, leftOperand, rightOperand);
 				leftOperand = content;
 				content = "";
 				rightOperand = "";
@@ -126,8 +164,7 @@ calculator.addEventListener("click", (event) => {
 
 		case "equalsTo":
 			rightOperand = parseFloat(content);
-			content = operate(operator, leftOperand, rightOperand);
-			display.textContent = content;
+			operate(operator, leftOperand, rightOperand);
 			break;
 
 		case "del":
