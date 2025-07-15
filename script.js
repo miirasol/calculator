@@ -68,6 +68,11 @@ function getOperator(event) {
 }
 
 function addDecimal() {
+	if (displayingTotal) {
+		clearContent();
+		displayingTotal = false;
+	}
+
 	if (!content) {
 		content += "0.";
 		display.textContent = content;
@@ -90,6 +95,11 @@ function assignToOperand(content) {
 }
 
 function buttonToDisplay(event) {
+	if (displayingTotal) {
+		clearContent();
+		displayingTotal = false;
+	}
+
 	content += event.target.id;
 	assignToOperand(content);
 	display.textContent = content;
@@ -148,6 +158,7 @@ calculator.addEventListener("click", (event) => {
 		case "equalsTo":
 			operate(operator, leftOperand, rightOperand);
 			display.textContent = content;
+			displayingTotal = true;
 			break;
 
 		case "del":
