@@ -219,5 +219,8 @@ document.addEventListener("keydown", (event) => {
 		case "Delete":
 			deleteFromDisplay();
 			break;
+		case "Escape":
+			clearContent();
+			break;
 	}
 });
