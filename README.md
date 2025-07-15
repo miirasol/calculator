@@ -17,6 +17,7 @@ This project supports basic arithmetic operations with full keyboard interaction
   - `Escape` to clear everything
   - `Enter` or `=` to evaluate the expression
 - Clean, responsive UI
+- Up to 12 digit display
 
 ---
 
