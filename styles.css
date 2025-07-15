@@ -10,7 +10,6 @@
 }
 
 body {
-	color: white;
 	background-color: #2c2c2c;
 	overflow: hidden;
 }
@@ -90,7 +89,6 @@ h1 {
 	padding: 2px;
 	border-radius: 2rem;
 	background-color: #51575b;
-	color: #d8d4cf;
 	width: 4rem;
 	aspect-ratio: 1 / 1;
 	font-size: 2rem;
@@ -101,16 +99,16 @@ button {
 	border-left: 2px solid #f0f0f0;
 	border-right: 2px solid #888;
 	border-bottom: 2px solid #888;
+
+	color: #d8d4cf;
 }
 
 #clear {
 	background-color: #a30000;
-	color: #d8d4cf;
 }
 
 #del {
 	background-color: #5a3e19;
-	color: #d8d4cf;
 }
 
 footer {
