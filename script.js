@@ -66,7 +66,7 @@ function getOperator(event) {
 	if (event.type == "click") {
 		operator = event.target.id;
 	}
-	if (event.type == "keypress") {
+	if (event.type == "keydown") {
 		operator = event.key;
 	}
 	operatorButtonPressed = true;
@@ -101,7 +101,7 @@ function buttonToDisplay(event) {
 	if (event.type == "click") {
 		content += event.target.id;
 	}
-	if (event.type == "keypress") {
+	if (event.type == "keydown") {
 		content += event.key;
 	}
 	assignToOperand(content);
@@ -163,7 +163,7 @@ calculator.addEventListener("click", (event) => {
 	}
 });
 
-document.addEventListener("keypress", (event) => {
+document.addEventListener("keydown", (event) => {
 	if (content == "0" && event.key == "0") return;
 
 	switch (event.key) {
