@@ -29,16 +29,16 @@ function operate(op, a, b) {
 	let total;
 
 	switch (op) {
-		case "plus":
+		case "plus": case "+":
 			total = add(a, b);
 			break;
-		case "minus":
+		case "minus": case "-":
 			total = subtract(a, b);
 			break;
-		case "multiply":
+		case "multiply": case "*":
 			total = multiply(a, b);
 			break;
-		case "divide":
+		case "divide": case "/":
 			if (b === 0) {
 				clearContent();
 				content = "Can't divide by 0.";
@@ -52,7 +52,7 @@ function operate(op, a, b) {
 
 	leftOperand = total;
 	rightOperand = null;
-	operator = '';
+	operator = "";
 	operatorButtonPressed = false;
 	content = total.toString();
 	display.textContent = content;
@@ -63,10 +63,15 @@ function getOperator(event) {
 	if (operator && rightOperand !== null) {
 		operate(operator, leftOperand, rightOperand);
 	}
-	operator = event.target.id;
+	if (event.type == "click") {
+		operator = event.target.id;
+	}
+	if (event.type == "keypress") {
+		operator = event.key;
+	}
 	operatorButtonPressed = true;
 	displayingTotal = false;
-	content = '';
+	content = "";
 }
 
 function addDecimal() {
@@ -92,7 +97,13 @@ function buttonToDisplay(event) {
 	if (displayingTotal) {
 		clearContent();
 	}
-	content += event.target.id;
+
+	if (event.type == "click") {
+		content += event.target.id;
+	}
+	if (event.type == "keypress") {
+		content += event.key;
+	}
 	assignToOperand(content);
 	display.textContent = content;
 }
@@ -119,8 +130,16 @@ calculator.addEventListener("click", (event) => {
 	if (!event.target.id || (content == "0" && event.target.id == "0")) return;
 
 	switch (event.target.id) {
-		case "0": case "1": case "2": case "3": case "4":
-		case "5": case "6": case "7": case "8": case "9":
+		case "0":
+		case "1":
+		case "2":
+		case "3":
+		case "4":
+		case "5":
+		case "6":
+		case "7":
+		case "8":
+		case "9":
 			buttonToDisplay(event);
 			break;
 		case "decimal":
@@ -145,5 +164,37 @@ calculator.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keypress", (event) => {
-	if (!event.target.id) return;
+	if (content == "0" && event.key == "0") return;
+
+	switch (event.key) {
+		case "0":
+		case "1":
+		case "2":
+		case "3":
+		case "4":
+		case "5":
+		case "6":
+		case "7":
+		case "8":
+		case "9":
+			buttonToDisplay(event);
+			break;
+		case ".":
+			addDecimal();
+			break;
+		case "+":
+		case "-":
+		case "/":
+		case "*":
+			getOperator(event);
+			break;
+		case "Enter":
+		case "=":
+			operate(operator, leftOperand, rightOperand);
+			break;
+		case "Backspace":
+		case "Delete":
+			deleteFromDisplay();
+			break;
+	}
 });
