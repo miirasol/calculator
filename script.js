@@ -116,7 +116,7 @@ function clearContent() {
 const calculator = document.querySelector(".calculator-container");
 
 calculator.addEventListener("click", (event) => {
-	if (!event.target.id) return;
+	if (!event.target.id || (content == "0" && event.target.id == "0")) return;
 
 	switch (event.target.id) {
 		case "0": case "1": case "2": case "3": case "4":
@@ -142,4 +142,8 @@ calculator.addEventListener("click", (event) => {
 			clearContent();
 			break;
 	}
+});
+
+document.addEventListener("keypress", (event) => {
+	if (!event.target.id) return;
 });
