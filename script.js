@@ -24,7 +24,7 @@ function divide(a, b) {
 }
 
 function operate(op, a, b) {
-	if (isNaN(rightOperand)) {
+	if (rightOperand === '') {
 		return;
 	}
 
@@ -141,6 +141,7 @@ calculator.addEventListener("click", (event) => {
 		case "minus":
 		case "divide":
 		case "multiply":
+			operate(operator, leftOperand, rightOperand);
 			operator = getOperator(event);
 			break;
 
