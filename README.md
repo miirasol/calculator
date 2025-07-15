@@ -1,4 +1,4 @@
-# Calculator 🧮
+# Calculator App 🧮
 
 A simple web-based calculator built with vanilla JavaScript.  
 This project supports basic arithmetic operations with full keyboard interaction.
