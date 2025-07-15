@@ -54,9 +54,23 @@ function operate(op, a, b) {
 	rightOperand = null;
 	operator = "";
 	operatorButtonPressed = false;
-	content = total.toString();
+	content = formatNumber(total);
 	display.textContent = content;
 	displayingTotal = true;
+}
+
+function formatNumber(value) {
+	let str = value.toString();
+
+	if (str.length > 12) {
+		str = Number(value).toExponential(3);
+	}
+
+	if (str.length > 12) {
+		str = str.slice(0, 12);
+	}
+
+	return str;
 }
 
 function getOperator(event) {
@@ -78,6 +92,11 @@ function addDecimal() {
 	if (displayingTotal) {
 		clearContent();
 	}
+
+	if (content.length == 12) {
+		return;
+	}
+	
 	if (!content.includes(".")) {
 		content += content ? "." : "0.";
 		display.textContent = content;
@@ -96,6 +115,10 @@ function assignToOperand(value) {
 function buttonToDisplay(event) {
 	if (displayingTotal) {
 		clearContent();
+	}
+
+	if (content.length == 12) {
+		return;
 	}
 
 	if (event.type == "click") {
