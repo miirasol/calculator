@@ -29,16 +29,20 @@ function operate(op, a, b) {
 	let total;
 
 	switch (op) {
-		case "plus": case "+":
+		case "plus":
+		case "+":
 			total = add(a, b);
 			break;
-		case "minus": case "-":
+		case "minus":
+		case "-":
 			total = subtract(a, b);
 			break;
-		case "multiply": case "*":
+		case "multiply":
+		case "*":
 			total = multiply(a, b);
 			break;
-		case "divide": case "/":
+		case "divide":
+		case "/":
 			if (b === 0) {
 				clearContent();
 				content = "Can't divide by 0.";
@@ -60,14 +64,13 @@ function operate(op, a, b) {
 }
 
 function formatNumber(value) {
-	let str = value.toString();
+	const numericalPlaces = 10 ** 12;
+	
+	const rounded = Math.round(value * numericalPlaces) / numericalPlaces;
+	let str = rounded.toString();
 
 	if (str.length > 12) {
-		str = Number(value).toExponential(3);
-	}
-
-	if (str.length > 12) {
-		str = str.slice(0, 12);
+		str = rounded.toExponential(3);
 	}
 
 	return str;
@@ -96,7 +99,7 @@ function addDecimal() {
 	if (content.length == 12) {
 		return;
 	}
-	
+
 	if (!content.includes(".")) {
 		content += content ? "." : "0.";
 		display.textContent = content;
