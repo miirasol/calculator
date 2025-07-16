@@ -65,7 +65,7 @@ function operate(op, a, b) {
 
 function formatNumber(value) {
 	const numericalPlaces = 10 ** 12;
-	
+
 	const rounded = Math.round(value * numericalPlaces) / numericalPlaces;
 	let str = rounded.toString();
 
@@ -107,6 +107,15 @@ function addDecimal() {
 }
 
 function assignToOperand(value) {
+	if (value === "") {
+		if (operatorButtonPressed) {
+			rightOperand = null;
+		} else {
+			leftOperand = null;
+		}
+		return;
+	}
+	
 	const number = parseFloat(value);
 	if (operatorButtonPressed) {
 		rightOperand = number;
